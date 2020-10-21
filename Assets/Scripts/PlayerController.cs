@@ -39,7 +39,17 @@ public class PlayerController : MonoBehaviour
 
     public float animatorSpeed = 0f;
 
-
+    [System.Serializable]
+    public struct KeybindInputs
+    {
+        
+       //public KeyCode Left;
+       // public KeyCode Right;
+       // public KeyCode Jump;
+        
+    }
+    public KeybindInputs keybindInput;
+    
 
 
     // Start is called before the first frame update
@@ -52,6 +62,9 @@ public class PlayerController : MonoBehaviour
         restartButton.SetActive(false);
         Time.timeScale = 1;
 
+      // keybindInput.Left = KeybindManager.keys["Left"];
+        //keybindInput.Right = KeybindManager.keys["Right"];
+        //keybindInput.Jump = KeybindManager.keys["Jump"];
     }
 
     // Update is called once per frame
@@ -80,14 +93,14 @@ public class PlayerController : MonoBehaviour
             extraJumps = extraJumpsValue; // reset the jumps
             jumpsTextUI.text = Convert.ToString(extraJumps); // update jump text
         }
-        if (Input.GetKeyDown(KeyCode.Space) && extraJumps > 0) // if player jumps and has jumps left
+        if (Input.GetButton("Jump") && extraJumps > 0) // if player jumps and has jumps left
         {
             //JUMP!
             playerController.velocity = Vector2.up * jumpForce;
             extraJumps--;
             jumpsTextUI.text = Convert.ToString(extraJumps);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && extraJumps == 0 && isGrounded == true)
+        else if (Input.GetButton("Jump") && extraJumps == 0 && isGrounded == true)
         {
             playerController.velocity = Vector2.up * jumpForce;
         }
