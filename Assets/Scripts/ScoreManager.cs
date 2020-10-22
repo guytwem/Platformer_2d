@@ -26,12 +26,14 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     public void ChangeScore(int coinValue)
     {
+        //add 1 to score string 
         score += coinValue;
         coinText.text = "Coins: " + score.ToString();
     }
 
     public void KillCounter(int killValue)
     {
+        // add 1 to score for a kill
         killScore += killValue;
         killText.text = "Kills: " + killScore.ToString();
     }

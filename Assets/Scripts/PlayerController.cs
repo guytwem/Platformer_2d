@@ -35,9 +35,9 @@ public class PlayerController : MonoBehaviour
 
     public Text jumpsTextUI;
 
-    public int killValue = 1;
+    public int killValue = 1; // how much points you get for a kill
 
-    public float animatorSpeed = 0f;
+    public float animatorSpeed = 0f; // speed variable for change of animation
 
     [System.Serializable]
     public struct KeybindInputs
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         }
         if (playerController.transform.position.y < -20) // if player falls then death screen
         {
-            Debug.Log("Player Has Died");
+            
             gameOver.SetActive(true);
             restartButton.SetActive(true);
             Pause();
@@ -117,18 +117,19 @@ public class PlayerController : MonoBehaviour
     }
     private void Movement(float horizontal)
     {
-        playerController.velocity = new Vector2(horizontal * speed, playerController.velocity.y);
+        playerController.velocity = new Vector2(horizontal * speed, playerController.velocity.y); // player velocity is horizontal * speed
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); // destroy coin when player collides
         }
 
         if (other.gameObject.CompareTag("Enemy"))
         {
+            // game over if player collides with enemy
             gameOver.SetActive(true);
             restartButton.SetActive(true);
             Pause();
@@ -136,6 +137,7 @@ public class PlayerController : MonoBehaviour
 
         if(other.gameObject.CompareTag("Head"))
         {
+            //destroy enemy if player jumps on head
             Destroy(enemy);
             ScoreManager.instance.KillCounter(killValue);
         }
@@ -143,6 +145,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip(float horizontal)
     {
+        //flip character based on what direction they are moving
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
             facingRight = !facingRight;
@@ -157,6 +160,7 @@ public class PlayerController : MonoBehaviour
 
     public void Pause()
     {
+        // freeze the game
         Time.timeScale = 0;
     }
 
