@@ -47,6 +47,7 @@ public class PauseMenu : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             pausePanel.SetActive(false);
+            optionsPanel.SetActive(false);
         }
     }
     #endregion

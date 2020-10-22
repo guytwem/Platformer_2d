@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public GameObject gameOver; // game over text
     public GameObject restartButton; // restart button
     public GameObject enemy;
- 
+
     private bool isGrounded; // is player on ground or not
     public Transform groundCheck; // is this object touching the ground
     public float checkRadius;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private int extraJumps; // how many jumps
     public int extraJumpsValue;
-    
+
 
     public GameObject coin; // what gameobject is the coin
 
@@ -35,21 +35,25 @@ public class PlayerController : MonoBehaviour
 
     public Text jumpsTextUI;
 
-    public int killValue = 1; // how much points you get for a kill
+    public int killValue = 1;
 
-    public float animatorSpeed = 0f; // speed variable for change of animation
+    public float animatorSpeed = 0f;
+
+    [Header("Audio")]
+    public AudioSource mainAudio;
+    public AudioClip[] sfx;
 
     [System.Serializable]
     public struct KeybindInputs
     {
-        
-       //public KeyCode Left;
-       // public KeyCode Right;
-       // public KeyCode Jump;
-        
+
+        //public KeyCode Left;
+        // public KeyCode Right;
+        // public KeyCode Jump;
+
     }
     public KeybindInputs keybindInput;
-    
+
 
 
     // Start is called before the first frame update
@@ -62,7 +66,7 @@ public class PlayerController : MonoBehaviour
         restartButton.SetActive(false);
         Time.timeScale = 1;
 
-      // keybindInput.Left = KeybindManager.keys["Left"];
+        // keybindInput.Left = KeybindManager.keys["Left"];
         //keybindInput.Right = KeybindManager.keys["Right"];
         //keybindInput.Jump = KeybindManager.keys["Jump"];
     }
@@ -86,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
         animatorSpeed = Input.GetAxisRaw("Horizontal"); // sets animator speed to the horizontal input
 
-        animator.SetFloat("Speed",Mathf.Abs(animatorSpeed)); // makes animator swap idle to run when player moves. Mathf Abs makes the animatorspeed stay above 0.
+        animator.SetFloat("Speed", Mathf.Abs(animatorSpeed)); // makes animator swap idle to run when player moves. Mathf Abs makes the animatorspeed stay above 0.
 
         if (isGrounded == true) // if player is on the ground
         {
@@ -96,6 +100,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Jump") && extraJumps > 0) // if player jumps and has jumps left
         {
             //JUMP!
+            jumpSound();
             playerController.velocity = Vector2.up * jumpForce;
             extraJumps--;
             jumpsTextUI.text = Convert.ToString(extraJumps);
@@ -106,7 +111,10 @@ public class PlayerController : MonoBehaviour
         }
         if (playerController.transform.position.y < -20) // if player falls then death screen
         {
-            
+            DeathSound();
+            Debug.Log("Player Has Died");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             gameOver.SetActive(true);
             restartButton.SetActive(true);
             Pause();
@@ -117,27 +125,25 @@ public class PlayerController : MonoBehaviour
     }
     private void Movement(float horizontal)
     {
-        playerController.velocity = new Vector2(horizontal * speed, playerController.velocity.y); // player velocity is horizontal * speed
+        playerController.velocity = new Vector2(horizontal * speed, playerController.velocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            Destroy(other.gameObject); // destroy coin when player collides
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-            // game over if player collides with enemy
             gameOver.SetActive(true);
             restartButton.SetActive(true);
             Pause();
         }
 
-        if(other.gameObject.CompareTag("Head"))
+        if (other.gameObject.CompareTag("Head"))
         {
-            //destroy enemy if player jumps on head
             Destroy(enemy);
             ScoreManager.instance.KillCounter(killValue);
         }
@@ -145,7 +151,6 @@ public class PlayerController : MonoBehaviour
 
     private void Flip(float horizontal)
     {
-        //flip character based on what direction they are moving
         if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
         {
             facingRight = !facingRight;
@@ -160,11 +165,18 @@ public class PlayerController : MonoBehaviour
 
     public void Pause()
     {
-        // freeze the game
         Time.timeScale = 0;
     }
 
+    public void jumpSound() //Sound for Jumping
+    {
+        mainAudio.PlayOneShot(sfx[0]);
+    }
+
+    public void DeathSound() //Sound that plays on death
+    {
+        mainAudio.PlayOneShot(sfx[1]);
+    }
 
 
-    
 }
