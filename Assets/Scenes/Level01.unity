@@ -1030,6 +1030,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 660358437880306387, guid: e5da656f34dcc5445911076b0b4e6079,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.008155823
+      objectReference: {fileID: 0}
+    - target: {fileID: 660358437880306387, guid: e5da656f34dcc5445911076b0b4e6079,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.4567108
+      objectReference: {fileID: 0}
     - target: {fileID: 3045129671451968625, guid: e5da656f34dcc5445911076b0b4e6079,
         type: 3}
       propertyPath: m_Name
@@ -1038,7 +1048,7 @@ PrefabInstance:
     - target: {fileID: 3045129671451968629, guid: e5da656f34dcc5445911076b0b4e6079,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 98.10976
+      value: 100.708
       objectReference: {fileID: 0}
     - target: {fileID: 3045129671451968629, guid: e5da656f34dcc5445911076b0b4e6079,
         type: 3}
@@ -1089,6 +1099,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581954408974592608, guid: e5da656f34dcc5445911076b0b4e6079,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.761
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5da656f34dcc5445911076b0b4e6079, type: 3}
@@ -2594,7 +2609,7 @@ MonoBehaviour:
   start: {fileID: 968160297}
   gameOver: {fileID: 1694670604}
   restartButton: {fileID: 483686329}
-  enemy: {fileID: 0}
+  enemy: {fileID: 943981970}
   groundCheck: {fileID: 334402504}
   checkRadius: 0.5
   whatIsGround:
@@ -3613,6 +3628,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7334436356600996136, guid: 3152f3d7e34e5d046841cfb9daab3e37,
     type: 3}
   m_PrefabInstance: {fileID: 4390026253813967023}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &943981970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3045129671451968625, guid: e5da656f34dcc5445911076b0b4e6079,
+    type: 3}
+  m_PrefabInstance: {fileID: 234915789}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &968160297
 GameObject:

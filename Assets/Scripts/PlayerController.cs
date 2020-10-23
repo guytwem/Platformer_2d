@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         if (playerController.transform.position.y < -20) // if player falls then death screen
         {
             DeathSound();
-            Debug.Log("Player Has Died");
+            
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             gameOver.SetActive(true);
